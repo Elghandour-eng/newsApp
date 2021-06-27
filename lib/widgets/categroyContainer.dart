@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newsapp/Models.dart';
+import 'file:///C:/Users/start/AndroidStudioProjects/newsapp/lib/Models/categoryMode.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp/screens/CategoryScreen.dart';
 

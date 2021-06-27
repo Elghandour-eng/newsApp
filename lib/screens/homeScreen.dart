@@ -2,10 +2,9 @@ import 'package:animations/animations.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:newsapp/Models.dart';
+import 'file:///C:/Users/start/AndroidStudioProjects/newsapp/lib/Models/categoryMode.dart';
 import 'package:newsapp/screens/searchScreen.dart';
 import 'package:newsapp/widgets/categroyContainer.dart';
-import 'package:shimmer/shimmer.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -29,6 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          print('dsf');
+        },
         child: OpenContainer(
 
           transitionDuration: Duration(milliseconds: 700),
