@@ -32,6 +32,8 @@ dependencies:
   country_code_picker:
   flutter_screenutil:
   animations:
+  http:
+  provider:
 
 dev_dependencies:
   flutter_test:

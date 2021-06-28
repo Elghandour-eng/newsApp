@@ -39,6 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
 decoration: InputDecoration(
   prefixIcon: Icon(Icons.search),
   labelText: 'Searh Here',
+  labelStyle: TextStyle(fontSize: 15.sp),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.circular(20)
   )

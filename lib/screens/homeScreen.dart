@@ -1,10 +1,16 @@
 import 'package:animations/animations.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:newsapp/Models/newsModel.dart';
+import 'package:newsapp/helper/api_helper.dart';
 import 'file:///C:/Users/start/AndroidStudioProjects/newsapp/lib/Models/categoryMode.dart';
 import 'package:newsapp/screens/searchScreen.dart';
-import 'package:newsapp/widgets/categroyContainer.dart';
+import 'package:newsapp/widgets/listCategories.dart';
+import 'package:newsapp/widgets/smartTitle.dart';
+import 'package:provider/provider.dart';
+import 'package:newsapp/provider/country.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -14,7 +20,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+ApiHelper apiHelper=ApiHelper();
+List<NewsModel>news=[];
+getNews()
+{
 
+    apiHelper.getNews(context).then((value){
+    if(mounted){
+      setState(() {
+        news=value;
+
+      });}
+    });
+
+
+}
   List<Category>categories=
       [
         Category(title: 'General',),
@@ -25,6 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
       ];
   @override
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -59,7 +81,11 @@ bottom:
           padding:  EdgeInsets.all(ScreenUtil().setWidth(5)),
           child: CountryCodePicker(
             showOnlyCountryWhenClosed: true,
-
+onChanged: (v){
+              Provider.of<CountryProv>(context,listen: false).onChanged(v.code);
+              print(v.code);
+},
+            initialSelection: 'eg',
           ),
         ),
       ],
@@ -71,31 +97,38 @@ bottom:
         centerTitle: true,
         title: Padding(
           padding:  EdgeInsets.all(8.0),
-          child: Row(mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('SmartCode',style: TextStyle(color: Colors.deepPurple,
-              fontSize: 30.sp,fontWeight: FontWeight.bold),),
-              Text(' News',style: TextStyle(color: Colors.grey,
-                  fontSize: ScreenUtil().setSp(30),fontWeight: FontWeight.w600),)
-            ],
-          ),
+          child:  SmartTitle()
         ),
       ),
       body: Column(
         children: [
-          Container(
-            height: .224.sh,
-            width: MediaQuery.of(context).size.width,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                itemBuilder: (context,index)
-            {
-return CategoryContainer(
-  category:categories[index],
-);
-            }),
-          )
+          ListCategories(ca: categories,),
+        Container(
+          height: .585.sh,
+          width: 1.sw,
+          child: FutureBuilder(
+              future: getNews(),
+              builder: (context,snapshot)
+          {
+
+            return Container(height: .7.sh,
+              width: 1.sw,
+              child: ListView.builder(
+              itemCount: news.length
+              ,itemBuilder: (context,index){
+                return  Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(height: .3.sh,width: .9.sw,
+                  color: Colors.deepPurple,
+                  child: Image.network(news[index].imageUrl!=null?
+                  news[index].imageUrl:'https://www.gstatic.com/earth/social/00_generic_facebook-001.jpg'
+
+                    ,fit: BoxFit.cover,),),
+                );
+              }),
+            );
+          }),
+        )
         ],
       ),
     );

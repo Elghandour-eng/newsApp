@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:newsapp/provider/country.dart';
 import 'package:newsapp/screens/CategoryScreen.dart';
 import 'package:newsapp/screens/homeScreen.dart';
 import 'package:newsapp/screens/searchScreen.dart';
 import 'package:newsapp/screens/splashScreen.dart';
+import 'package:provider/provider.dart';
+
 
 void main()
 {
-  runApp(NewsApp());
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CountryProv()),
+
+      ],
+      child: NewsApp()));
 
 }
 class NewsApp extends StatelessWidget {
