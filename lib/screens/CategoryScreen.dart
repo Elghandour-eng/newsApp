@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp/Models/newsModel.dart';
 import 'package:newsapp/helper/api_helper.dart';
+import 'package:newsapp/screens/Article.dart';
 
 class CategoryScreen extends StatefulWidget {
  static String id ='categoryScreen';
@@ -30,11 +31,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   }
   @override
-  void dispose()
-  {
-    super.dispose();
-    getNews();
-  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -77,12 +74,19 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   ,itemBuilder: (context,index){
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(height: .3.sh,width: .9.sw,
-                    color: Colors.deepPurple,
-                    child: Image.network(news[index].imageUrl!=null?
-                    news[index].imageUrl:
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(context,
+                      MaterialPageRoute(builder: (context)
+                      =>ArticleView(url: news[index].url,)));
+                    },
+                    child: Container(height: .3.sh,width: .9.sw,
+                      color: Colors.deepPurple,
+                      child: Image.network(news[index].imageUrl!=null?
+                      news[index].imageUrl:
 'https://www.gstatic.com/earth/social/00_generic_facebook-001.jpg'
-                      ,fit: BoxFit.cover,),),
+                        ,fit: BoxFit.cover,),),
+                  ),
                 );
               }),
             );

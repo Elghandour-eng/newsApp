@@ -20,7 +20,7 @@ class CategoryContainer extends StatelessWidget {
           width: 250.w,
           decoration: BoxDecoration(image: DecorationImage(
             image: NetworkImage(category.imageUrl==null||category.imageUrl.isEmpty?
-            'https://www.gstatic.com/earth/social/00_generic_facebook-001.jpg'
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg67aM9EXHJ4Idpmu_RH_7zw_MPFUhGJUjHw&usqp=CAU'
             :category.imageUrl),
             fit: BoxFit.cover
           ),

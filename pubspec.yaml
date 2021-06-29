@@ -34,6 +34,8 @@ dependencies:
   animations:
   http:
   provider:
+  connectivity: ^3.0.6
+  webview_flutter:
 
 dev_dependencies:
   flutter_test:

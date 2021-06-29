@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:newsapp/provider/country.dart';
+import 'package:newsapp/screens/Article.dart';
 import 'package:newsapp/screens/CategoryScreen.dart';
 import 'package:newsapp/screens/homeScreen.dart';
 import 'package:newsapp/screens/searchScreen.dart';
@@ -34,6 +35,7 @@ class NewsApp extends StatelessWidget {
           SplashScreen.id:(context)=>SplashScreen(),
           CategoryScreen.id:(context)=>CategoryScreen(),
           SearchScreen.id:(context)=>SearchScreen(),
+          ArticleView.id:(context)=>ArticleView(),
         },
       ),
     );
